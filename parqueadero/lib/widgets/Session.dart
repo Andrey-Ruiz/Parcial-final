@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:parqueadero/Widgets/MyHomePage.dart';
+import 'package:parqueadero/Widgets/HomeUser.dart';
+import 'package:parqueadero/Widgets/MyHomePageB.dart';
 import 'package:parqueadero/models/CxCadmin.dart';
 import 'package:parqueadero/data/Data.dart';
 import 'package:parqueadero/models/User.dart';
@@ -9,6 +10,20 @@ class Session extends StatefulWidget {
   static const String nombre = 'inicio_S';
 
   State<Session> createState() => _SessionState();
+}
+
+class AuthService {
+  Future<String?> iniciarSesion(
+      String user, String password, List<CxCadmin> cxcadmin) async {
+    for (CxCadmin cxc in cxcadmin) {
+      for (User u in cxc.user) {
+        if (u.email == user && u.password == password) {
+          return u.type;
+        }
+      }
+    }
+    return null;
+  }
 }
 
 class _SessionState extends State<Session> {
@@ -25,7 +40,7 @@ class _SessionState extends State<Session> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Container(
-          margin: const EdgeInsets.only(left: 32, top: 38),
+          margin: const EdgeInsets.all(32),
           width: 350,
           height: 650,
           decoration: BoxDecoration(
@@ -33,6 +48,7 @@ class _SessionState extends State<Session> {
             borderRadius: BorderRadius.circular(20),
           ),
           child: SafeArea(
+              child: Center(
             child: Column(
               children: [
                 Container(
@@ -108,7 +124,9 @@ class _SessionState extends State<Session> {
                       const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      _login();
+                      if (_acceptTerms == true) {
+                        _login(context);
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor:
@@ -120,24 +138,34 @@ class _SessionState extends State<Session> {
                 )
               ],
             ),
-          ),
+          )),
         ),
       ),
     );
   }
 
-  void _login() {
+  void _login(BuildContext context) async {
     String user = _emailController.text;
     String password = _passwordController.text;
+    bool _isloged = false;
 
     //verificacion
-    for (var cxc in cxcadmin) {
-      for (var u in cxc.user) {
-        if (u.email == user && u.password == password) {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => MyHomePage()));
-        }
-        return;
+    String? inicio =
+        await AuthService().iniciarSesion(user, password, cxcadmin);
+
+    setState(() {
+      _isloged = inicio != null;
+    });
+
+    if (_isloged) {
+      if (inicio == 'residente') {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => HomeUser()));
+      } else if (inicio == 'administrador') {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => MyHomePageB(
+                  title: 'inico exitoso',
+                )));
       }
     }
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:parqueadero/Widgets/HomeUser.dart';
 import 'package:parqueadero/Widgets/MyHomePage.dart';
+import 'package:parqueadero/Widgets/MyHomePageB.dart';
 import 'package:parqueadero/Widgets/Session.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,8 +16,15 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: Session.nombre,
       routes: {
-        Session.nombre: (context) => Session(),
-        MyHomePage.nombre: (context) => MyHomePage(),
+        Session.nombre: (context) => const Session(),
+        MyHomePage.nombre: (context) => const MyHomePage(
+              title: '',
+            ),
+        // ignore: equal_keys_in_map
+        MyHomePageB.nombre: (context) => const MyHomePageB(
+              title: '',
+            ),
+        HomeUser.nombre: (context) => const HomeUser(),
       },
     );
   }

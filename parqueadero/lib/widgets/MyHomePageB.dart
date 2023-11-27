@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class MyHomePageB extends StatefulWidget {
+  const MyHomePageB({super.key, required this.title});
   static const String nombre = 'home';
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -16,10 +16,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePageB> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePageB> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'AQUI PAGAS',
+              'PANTALLA ADMIN',
             ),
             Text(
               '$_counter',
