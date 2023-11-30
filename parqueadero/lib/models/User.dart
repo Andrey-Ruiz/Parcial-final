@@ -1,16 +1,15 @@
-class User{
-  User({
-    required this.name,
-    required this.phone,
-    required this.email,
-    required this.id,
-    required this.torre,
-    required this.apto,
-    required this.admMes,
-    required this.password,
-    required this.status,
-    required this.type
-  });
+class User {
+  User(
+      {required this.name,
+      required this.phone,
+      required this.email,
+      required this.id,
+      required this.torre,
+      required this.apto,
+      required this.admMes,
+      required this.password,
+      required this.status,
+      required this.type});
 
   final String name;
   final String phone;
@@ -20,6 +19,6 @@ class User{
   final String apto;
   final String admMes;
   final String password;
-  final String status;
+  final bool status;
   final String type;
 }

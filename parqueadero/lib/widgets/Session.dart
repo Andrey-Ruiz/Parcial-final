@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:parqueadero/Localstorage/Sharepreference.dart';
 import 'package:parqueadero/Widgets/HomeUser.dart';
+import 'package:parqueadero/Widgets/MyHomePage.dart';
 import 'package:parqueadero/Widgets/MyHomePageB.dart';
 import 'package:parqueadero/models/CxCadmin.dart';
 import 'package:parqueadero/data/Data.dart';
@@ -18,11 +20,23 @@ class AuthService {
     for (CxCadmin cxc in cxcadmin) {
       for (User u in cxc.user) {
         if (u.email == user && u.password == password) {
+          await _saveUserData(cxc, u);
           return u.type;
         }
       }
     }
     return null;
+  }
+
+  Future<void> _saveUserData(CxCadmin cxc, User user) async {
+    final prefs = PrefernciaUsuario();
+    await prefs.initPrefs();
+
+    prefs.username = user.name;
+    prefs.anoadm = cxc.anoAdm;
+    prefs.mesadm = cxc.mesAdm;
+    prefs.admmes = user.admMes;
+    prefs.status = user.status;
   }
 }
 
@@ -158,6 +172,8 @@ class _SessionState extends State<Session> {
     });
 
     if (_isloged) {
+      final prefs = PrefernciaUsuario();
+      await prefs.initPrefs();
       if (inicio == 'residente') {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => HomeUser()));

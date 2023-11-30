@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parqueadero/Localstorage/Sharepreference.dart';
 import 'package:parqueadero/Widgets/CustomerDrawer.dart';
 import 'package:parqueadero/Widgets/MyHomePageB.dart';
 
@@ -13,6 +14,7 @@ class HomeUser extends StatefulWidget {
 
 class _HomeUserState extends State<HomeUser> {
   bool estado = false;
+  final prefs = PrefernciaUsuario();
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +125,7 @@ class _HomeUserState extends State<HomeUser> {
             //saldo cartera
             child: TextField(
               enabled: false,
-              controller: TextEditingController(text: 'Saldo Cartera'),
+              controller: TextEditingController(text: prefs.admmes),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
@@ -144,7 +146,8 @@ class _HomeUserState extends State<HomeUser> {
             //fecha pago
             child: TextField(
               enabled: false,
-              controller: TextEditingController(text: 'Fecha Pago'),
+              controller: TextEditingController(
+                  text: '${prefs.anoadm}-${prefs.mesadm}'),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
@@ -173,7 +176,7 @@ class _HomeUserState extends State<HomeUser> {
               title: const Text('Autorizado para ingreso a Parqueadero',
                   style: TextStyle(color: Colors.black)),
               controlAffinity: ListTileControlAffinity.leading,
-              value: false,
+              value: prefs.status,
               onChanged: null,
             ),
           ),

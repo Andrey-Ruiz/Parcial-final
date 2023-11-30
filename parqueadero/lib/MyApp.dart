@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parqueadero/Widgets/HomeUser.dart';
 import 'package:parqueadero/Widgets/MyHomePage.dart';
 import 'package:parqueadero/Widgets/MyHomePageB.dart';
+import 'package:parqueadero/Widgets/Registro.dart';
 import 'package:parqueadero/Widgets/Session.dart';
 
 class MyApp extends StatelessWidget {
@@ -16,15 +17,15 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: Session.nombre,
       routes: {
-        Session.nombre: (context) => const Session(),
-        MyHomePage.nombre: (context) => const MyHomePage(
+        Session.nombre: (context) => Session(),
+        MyHomePage.nombre: (context) => MyHomePage(
               title: '',
             ),
-        // ignore: equal_keys_in_map
-        MyHomePageB.nombre: (context) => const MyHomePageB(
+        MyHomePageB.nombre: (context) => MyHomePageB(
               title: '',
             ),
-        HomeUser.nombre: (context) => const HomeUser(),
+        HomeUser.nombre: (context) => HomeUser(),
+        Registro.nombre: (context) => Registro(),
       },
     );
   }

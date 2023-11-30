@@ -14,7 +14,7 @@ final List<CxCadmin> cxcadmin = [
         apto: '101',
         admMes: '0',
         password: '1234abcd',
-        status: 'True',
+        status: true,
         type: 'residente')
   ]),
   CxCadmin(anoAdm: '2023', mesAdm: '1', pagoAdm: '', fechaPago: '', user: [
@@ -27,7 +27,7 @@ final List<CxCadmin> cxcadmin = [
         apto: '705',
         admMes: '7000',
         password: 'abcd1234',
-        status: 'False',
+        status: false,
         type: 'residente')
   ]),
   CxCadmin(anoAdm: '', mesAdm: '', pagoAdm: '', fechaPago: '', user: [
@@ -40,7 +40,7 @@ final List<CxCadmin> cxcadmin = [
         apto: '',
         admMes: '',
         password: 'admin',
-        status: 'True',
+        status: true,
         type: 'administrador')
   ]),
 ];
